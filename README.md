@@ -1,11 +1,68 @@
-# lista-frutas
-Primero, se crea el repositorio lista-frutas
-Segundo, clonar el repositorio en local
-Añadir los archivos al repositorio local con git add.
-luego el git commit - m "agregue archivos js, html"
-y actualizamos los cambio en el GitHub con push origin master
+### LISTA-FRUTAS
+**PASOS PARA SUBIR AL GitHub USANDO GIT**
+1 Primero, se crea el repositorio lista-frutas
+2 Segundo, clonar el repositorio en local
+3 Inicializamos el repositorio local en el GitHub ->git init
+4 Añadir los archivos al repositorio local con git add.
+5 Luego el git commit - m "agregue archivos js, html"
+6 Actualizamos los cambio en el GitHub con push origin master
 
-Primero se crea un repositorio en la plataforma Git Hub
-Luego se clona al repositorio en local
-Se crea una lista ordenada de frutas
-Agregar un boton que añade frutas
+**CODIGO HTML**
+1 Se agrego una imagen con el siguiente codigo:
+> <img src="img/frutas.jpg">
+![Alt-Text](img/frutas.jpg)
+
+**CODIGO JAVASCRIPT**
+```javascript
+/* Debes pegar todo el código en main.js*/
+var productos = [];
+var records = document.getElementById('records');
+
+// Constructor para generar un nuevo producto
+function Producto(compra, cantidad) {
+  this.compra = compra.toLowerCase(),
+  this.producttID = (productos.length + 1),
+  this.cantidad = cantidad
+};
+
+//Método para imprimir un producto en html
+Producto.prototype.toHTML = function () {
+  var html = '';
+  html += this.compra.toUpperCase() + '<br>';
+  html += 'Cantidad: ' + this.cantidad + '<br>';
+  html += '<br><br>';
+  return html;
+}
+
+//Función que une todas las compras guardadas en el array productos
+function mergeHTML (){
+  var html = '';
+  for (var i=0; i<productos.length; i++){
+    html += productos[i].toHTML();
+  }
+  return html;
+}
+
+//función que imprime un producto luego de ingresarlo
+function printHTML (html){
+  records.innerHTML = '';
+  records.innerHTML = html;
+}
+
+// Cuando hacen click en el boton de nueva compra, crea una nueva compra y la añade al array de productos
+var addCompra = document.getElementById('nuevacompra');
+addCompra.onclick = function() {
+  var compra = prompt('Ingrese su nueva compra');
+  var cantidad = prompt('Ingrese la cantidad');
+  var product  = new Producto (compra, cantidad);
+  productos.push(product);
+  printHTML(product.toHTML());
+};
+
+
+// al hacerle click a mostrar todas las compras, imprime todas las compras en el html. ESTA ESTÁ BUENA, NO CAMBIAR NADA
+var printAll = document.getElementById('print');
+printAll.onclick = function() {
+  printHTML(mergeHTML());
+}
+```
